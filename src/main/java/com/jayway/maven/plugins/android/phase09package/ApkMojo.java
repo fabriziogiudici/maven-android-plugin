@@ -253,12 +253,7 @@ public class ApkMojo extends AbstractAndroidMojo {
                 }
             }
             jarFiles.add(artifact.getFile());
-            sortedArtifacts.add(String.format("%s:%s:%s:%s:%s",
-                                              artifact.getGroupId(),
-                                              artifact.getArtifactId(),
-                                              artifact.getType(),
-                                              artifact.getVersion(),
-                                              artifact.getScope()));        
+            sortedArtifacts.add(artifact.toString());        
         }
 
         if (getLog().isDebugEnabled()) {
