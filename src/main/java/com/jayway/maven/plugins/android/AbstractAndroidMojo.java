@@ -184,6 +184,12 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
      */
     protected String configurations;
 
+    /**
+     * A list of extra arguments that must be passed to aapt.
+     *
+     * @parameter expression="${android.aaptExtraArgs}"
+     */
+    protected String[] aaptExtraArgs;
 
     /**
      * Decides whether the Apk should be generated or not. If set to false, dx and apkBuilder will not run. This is probably most
@@ -762,10 +768,10 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
                 // There is no <sdk><path> tag in the pom.
 
                 if (sdkPath != null) {
-                    // -Dandroid.sdk.path is set on command line, or via <properties><sdk.path>...
+                    // -Dandroid.sdk.path is set on command line, or via <properties><android.sdk.path>...
                     chosenSdkPath = sdkPath;
                 } else {
-                    // No -Dandroid.sdk.path is set on command line, or via <properties><sdk.path>...
+                    // No -Dandroid.sdk.path is set on command line, or via <properties><android.sdk.path>...
                     chosenSdkPath = new File(getAndroidHomeOrThrow());
                 }
             }
@@ -780,10 +786,10 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
             // There is no <sdk> tag in the pom.
 
             if (sdkPath != null) {
-                // -Dandroid.sdk.path is set on command line, or via <properties><sdk.path>...
+                // -Dandroid.sdk.path is set on command line, or via <properties><android.sdk.path>...
                 chosenSdkPath = sdkPath;
             } else {
-                // No -Dandroid.sdk.path is set on command line, or via <properties><sdk.path>...
+                // No -Dandroid.sdk.path is set on command line, or via <properties><android.sdk.path>...
                 chosenSdkPath = new File(getAndroidHomeOrThrow());
             }
 
@@ -797,7 +803,7 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
     private String getAndroidHomeOrThrow() throws MojoExecutionException {
         final String androidHome = System.getenv(ENV_ANDROID_HOME);
         if (isBlank(androidHome)) {
-            throw new MojoExecutionException("No Android SDK path could be found. You may configure it in the pom using <sdk><path>...</path></sdk> or <properties><sdk.path>...</sdk.path></properties> or on command-line using -Dandroid.sdk.path=... or by setting environment variable " + ENV_ANDROID_HOME);
+            throw new MojoExecutionException("No Android SDK path could be found. You may configure it in the pom using <sdk><path>...</path></sdk> or <properties><android.sdk.path>...</android.sdk.path></properties> or on command-line using -Dandroid.sdk.path=... or by setting environment variable " + ENV_ANDROID_HOME);
         }
         return androidHome;
     }
