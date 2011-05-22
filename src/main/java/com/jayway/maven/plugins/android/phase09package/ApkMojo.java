@@ -107,13 +107,6 @@ public class ApkMojo extends AbstractAndroidMojo {
     private File nativeLibrariesDirectory;
 
     /**
-     * <p>If set to true, all the artifacts that get packaged into the .apk are listed on the Maven log.</p>
-     *
-     * @parameter expression="${android.logApkArtifacts}" default-value="false"
-     */
-    private boolean logApkArtifacts;
-
-    /**
      * <p>Allows to detect and extract the duplicate files from embedded jars. In that case, the plugin analyzes
      * the content of all embedded dependencies and checks they are no duplicates inside those dependencies. Indeed,
      * Android does not support duplicates, and all dependencies are inlined in the APK. If duplicates files are found,
@@ -268,12 +261,12 @@ public class ApkMojo extends AbstractAndroidMojo {
                                               artifact.getScope()));        
         }
 
-        if (logApkArtifacts) {
+        if (getLog().isDebugEnabled()) {
             Collections.sort(sortedArtifacts);
-            getLog().info("Artifacts that will be packaged into the .apk:");
+            getLog().debug("Artifacts that will be packaged into the .apk:");
 
             for (String artifactName : sortedArtifacts) {
-                getLog().info("    " + artifactName);
+                getLog().debug("    " + artifactName);
             }
         }
 
