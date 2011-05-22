@@ -423,6 +423,7 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
      *         {@code null}. This excludes artifacts of the {@code EXCLUDED_DEPENDENCY_SCOPES} scopes.
      */
     protected Set<Artifact> getRelevantCompileArtifacts() {
+        getLog().info("******** getRelevantCompileArtifacts()");
         final List<Artifact> allArtifacts = (List<Artifact>) project.getCompileArtifacts();
         final Set<Artifact> results = filterOutIrrelevantArtifacts(allArtifacts);
         return results;
@@ -433,6 +434,7 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
      *         EXCLUDED_DEPENDENCY_SCOPES} scopes.
      */
     protected Set<Artifact> getRelevantDependencyArtifacts() {
+        getLog().info("******** getRelevantDependencyArtifacts()");
         final Set<Artifact> allArtifacts = (Set<Artifact>) project.getDependencyArtifacts();
         final Set<Artifact> results = filterOutIrrelevantArtifacts(allArtifacts);
         return results;
@@ -444,6 +446,7 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
      *         This should maintain dependency order to comply with library project resource precedence.
      */
     protected Set<Artifact> getAllRelevantDependencyArtifacts() {
+        getLog().info("******** getAllRelevantDependencyArtifacts()");
         final Set<Artifact> allArtifacts = (Set<Artifact>) project.getArtifacts();
         final Set<Artifact> results = filterOutIrrelevantArtifacts(allArtifacts);
         return results;
