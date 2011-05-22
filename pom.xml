@@ -17,7 +17,7 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+    <groupId>it.tidalwave.fork.com.jayway.maven.plugins.android.generation2</groupId>
     <artifactId>maven-android-plugin</artifactId>
     <version>2.9.0-beta-4-fg-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
@@ -264,14 +264,14 @@
 
     <distributionManagement>
         <repository>
-            <id>maven2-release-repository.tidalwave.it</id>
-            <name>Tidalwave Releases Repository</name>
-            <url>http://services.tidalwave.it/nexus/content/repositories/releases/</url>
+            <id>staging-oss.sonatype.org</id>
+            <name>Sonatype Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-            <id>maven2-snapshot-repository.tidalwave.it</id>
-            <name>Tidalwave Snapshots Repository</name>
-            <url>http://services.tidalwave.it/nexus/content/repositories/snapshots/</url>
+            <id>snapshots-oss.sonatype.org</id>
+            <name>Sonatype Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <site>
             <id>maven-android-plugin-m2site.googlecode.com</id>
