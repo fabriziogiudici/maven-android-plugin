@@ -31,9 +31,9 @@
         <maven-plugin-plugin.version>2.7</maven-plugin-plugin.version>
     </properties>
     <scm>
-        <url>http://github.com/jayway/maven-android-plugin/tree/${scm.branch}</url>
-        <connection>scm:git:git://github.com/jayway/maven-android-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jayway/maven-android-plugin.git</developerConnection>
+        <url>http://github.com/fabriziogiudici/maven-android-plugin/tree/${scm.branch}</url>
+        <connection>scm:git:git://github.com/fabriziogiudici/maven-android-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/fabriziogiudici/maven-android-plugin.git</developerConnection>
     </scm>
     <issueManagement>
         <system>Google Code Issue Tracking</system>
