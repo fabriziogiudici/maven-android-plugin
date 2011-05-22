@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -105,6 +106,12 @@ public class ApkMojo extends AbstractAndroidMojo {
      */
     private File nativeLibrariesDirectory;
 
+    /**
+     * <p>If set to true, all the artifacts that get packaged into the .apk are listed on the Maven log.</p>
+     *
+     * @parameter expression="${android.logApkArtifacts}" default-value="false"
+     */
+    private boolean logApkArtifacts;
 
     /**
      * <p>Allows to detect and extract the duplicate files from embedded jars. In that case, the plugin analyzes
@@ -242,6 +249,8 @@ public class ApkMojo extends AbstractAndroidMojo {
         // at the dependencies declared in the pom.  Currently, all .so files are automatically included
         processNativeLibraries(nativeFolders);
 
+        List<String> sortedArtifacts = new ArrayList<String>();
+ 
         for (Artifact artifact : getRelevantCompileArtifacts()) {
             if (extractDuplicates) {
                 try {
@@ -251,6 +260,21 @@ public class ApkMojo extends AbstractAndroidMojo {
                 }
             }
             jarFiles.add(artifact.getFile());
+            sortedArtifacts.add(String.format("%s:%s:%s:%s:%s",
+                                              artifact.getGroupId(),
+                                              artifact.getArtifactId(),
+                                              artifact.getType(),
+                                              artifact.getVersion(),
+                                              artifact.getScope()));        
+        }
+
+        if (logApkArtifacts) {
+            Collections.sort(sortedArtifacts);
+            getLog().info("Artifacts that will be packaged into the .apk:");
+
+            for (String artifactName : sortedArtifacts) {
+                getLog().info("    " + artifactName);
+            }
         }
 
         // Check duplicates.
