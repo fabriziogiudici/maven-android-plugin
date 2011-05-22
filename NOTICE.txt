@@ -1,0 +1,4 @@
+This is a forked version of the original, specifically designed for ad-hoc needs of the blueBill Mobile project (issue-165 and issue-166). 
+This fork won't be maintained when the two issues will be fixed in the original project.
+
+fabrizio.giudici@tidalwave.it
