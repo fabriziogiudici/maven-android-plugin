@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -242,6 +243,8 @@ public class ApkMojo extends AbstractAndroidMojo {
         // at the dependencies declared in the pom.  Currently, all .so files are automatically included
         processNativeLibraries(nativeFolders);
 
+        List<String> packagedArtifactNames = new ArrayList<String>();
+ 
         for (Artifact artifact : getRelevantCompileArtifacts()) {
             if (extractDuplicates) {
                 try {
@@ -251,6 +254,16 @@ public class ApkMojo extends AbstractAndroidMojo {
                 }
             }
             jarFiles.add(artifact.getFile());
+            packagedArtifactNames.add(artifact.toString());        
+        }
+
+        if (getLog().isDebugEnabled()) {
+            Collections.sort(packagedArtifactNames);
+            getLog().debug("Artifacts that will be packaged into the .apk:");
+
+            for (String packagedArtifactName : packagedArtifactNames) {
+                getLog().debug("    " + packagedArtifactName);
+            }
         }
 
         // Check duplicates.
