@@ -242,7 +242,7 @@ public class ApkMojo extends AbstractAndroidMojo {
         // at the dependencies declared in the pom.  Currently, all .so files are automatically included
         processNativeLibraries(nativeFolders);
 
-        List<String> sortedArtifacts = new ArrayList<String>();
+        List<String> packagedArtifacts = new ArrayList<String>();
  
         for (Artifact artifact : getRelevantCompileArtifacts()) {
             if (extractDuplicates) {
@@ -253,14 +253,14 @@ public class ApkMojo extends AbstractAndroidMojo {
                 }
             }
             jarFiles.add(artifact.getFile());
-            sortedArtifacts.add(artifact.toString());        
+            packagedArtifacts.add(artifact.toString());        
         }
 
         if (getLog().isDebugEnabled()) {
-            Collections.sort(sortedArtifacts);
+            Collections.sort(packagedArtifacts);
             getLog().debug("Artifacts that will be packaged into the .apk:");
 
-            for (String artifactName : sortedArtifacts) {
+            for (String artifactName : packagedArtifacts) {
                 getLog().debug("    " + artifactName);
             }
         }
