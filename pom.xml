@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jayway.maven.plugins.android.generation2</groupId>
     <artifactId>maven-android-plugin</artifactId>
-    <version>2.9.0-beta-4</version>
+    <version>2.9.0-beta-4-fg-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>Maven Android Plugin - maven-android-plugin</name>
     <description>Maven Plugin for Android</description>
@@ -39,10 +39,6 @@
         <system>Google Code Issue Tracking</system>
         <url>http://code.google.com/p/maven-android-plugin/issues/list</url>
     </issueManagement>
-    <ciManagement>
-        <system>Hudson</system>
-        <url>http://hudson.josefson.org/view/Maven%20Android%20Plugin%202.x/</url>
-    </ciManagement>
     <licenses>
         <license>
             <name>Apache 2.0</name>
@@ -268,14 +264,14 @@
 
     <distributionManagement>
         <repository>
-            <id>oss.sonatype.org-jayway-staging</id>
-            <name>OpenSource Release Staging on Sonatype.org</name>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>maven2-release-repository.tidalwave.it</id>
+            <name>Tidalwave Releases Repository</name>
+            <url>http://services.tidalwave.it/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
-            <id>oss.sonatype.org-jayway-snapshots</id>
-            <name>Jayway OpenSource SNAPSHOTs on Sonatype.org</name>
-            <url>http://oss.sonatype.org/content/repositories/jayway-snapshots/</url>
+            <id>maven2-snapshot-repository.tidalwave.it</id>
+            <name>Tidalwave Snapshots Repository</name>
+            <url>http://services.tidalwave.it/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
         <site>
             <id>maven-android-plugin-m2site.googlecode.com</id>
