@@ -456,9 +456,25 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
                 continue;
             }
 
+//            getLog().info("Scope for " + artifact + " is " + artifact.getScope());
             if (EXCLUDED_DEPENDENCY_SCOPES.contains(artifact.getScope())) {
                 continue;
             }
+            
+            // BEGIN hardwired patch for issue 166
+            List<String> excludedStuff = Arrays.asList
+              (
+                "it.tidalwave.bluebill:it-tidalwave-semantic-io:jar",
+                "it.tidalwave.netbeans:it-tidalwave-netbeans-util:jar",
+                "org.netbeans.api:org-openide-util:jar",
+                "org.openrdf.sesame:sesame-model:jar"
+              );
+            
+            if (excludedStuff.contains(artifact.toString().replaceAll(":jar:.*$", ":jar"))) {
+                getLog().warn("Hardwired patch for issue-166: excluding " + artifact);
+                continue;
+            }
+            // END hardwired patch for issue 166
 
             // TODO: this statement must be retired in version 3.0, but we can't do that yet because we promised to not break backwards compatibility within the 2.x series.
             if (artifact.getGroupId().equals("android")) {
