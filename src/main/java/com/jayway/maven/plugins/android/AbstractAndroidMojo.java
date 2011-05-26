@@ -472,6 +472,7 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
                 "it.tidalwave.bluebill:it-tidalwave-semantic-io:jar",
                 "it.tidalwave.netbeans:it-tidalwave-netbeans-util:jar",
                 "org.netbeans.api:org-openide-util:jar",
+                "org.netbeans.api:org-openide-util-lookup:jar",
                 "org.openrdf.sesame:sesame-model:jar"
               );
             
