@@ -44,14 +44,44 @@ import com.jayway.maven.plugins.android.CommandExecutor;
  * @requiresDependencyResolution compile
  */
 public class UnpackMojo extends AbstractAndroidMojo {
-	public void execute() throws MojoExecutionException, MojoFailureException {
+	/**
+	 * If true, the library will be unpacked only when outputDirectory doesn't
+	 * exist, i.e, a clean build for most cases.
+	 * 
+	 * @parameter expression="${android.lazyLibraryUnpack}"
+	 *            default-value="false"
+	 */
+	private boolean lazyLibraryUnpack;
+	
+        /**
+         * 
+         * <p>Whether it should also unpack dependencies in addition to this module artifact.</p>
+         * 
+         * @parameter default-value=true
+         */    
+        protected boolean unpackDependencies;
+
+        /**
+         * 
+         * <p>The name of the file that the Unpack mojo should unpack. It this parameter is not set, it's the jar artifact 
+         * produced in the current module. It can be set to a different value if some non-standard workflow is needed.</p>
+         * 
+         * @parameter 
+         */    
+        protected String fileToUnpack;
+    
+        public void execute() throws MojoExecutionException, MojoFailureException {
 
 		CommandExecutor executor = CommandExecutor.Factory
 				.createDefaultCommmandExecutor();
 		executor.setLogger(this.getLog());
 
+                if (fileToUnpack == null) {
+                    fileToUnpack =  project.getBuild().getFinalName() + ".jar";
+                }
+                
 		File inputFile = new File(project.getBuild().getDirectory()
-				+ File.separator + project.getBuild().getFinalName() + ".jar");
+				+ File.separator + fileToUnpack);
 
 		if (generateApk) {
 			// Unpack all dependent and main classes
@@ -62,34 +92,41 @@ public class UnpackMojo extends AbstractAndroidMojo {
 	private File unpackClasses(File inputFile) throws MojoExecutionException {
 		File outputDirectory = new File(project.getBuild().getDirectory(),
 				"android-classes");
-		for (Artifact artifact : getRelevantCompileArtifacts()) {
+                if (lazyLibraryUnpack && outputDirectory.exists())
+			getLog().info("skip library unpacking due to lazyLibraryUnpack policy");
+                else if (unpackDependencies) {
+                    getLog().debug("Unpacking dependencies ...");
+                    
+                    for (Artifact artifact : getRelevantCompileArtifacts()) {
 
-			if (artifact.getFile().isDirectory()) {
-				try {
-					FileUtils
-							.copyDirectory(artifact.getFile(), outputDirectory);
-				} catch (IOException e) {
-					throw new MojoExecutionException(
-							"IOException while copying "
-									+ artifact.getFile().getAbsolutePath()
-									+ " into "
-									+ outputDirectory.getAbsolutePath(), e);
-				}
-			} else {
-				try {
-					unjar(new JarFile(artifact.getFile()), outputDirectory);
-				} catch (IOException e) {
-					throw new MojoExecutionException(
-							"IOException while unjarring "
-									+ artifact.getFile().getAbsolutePath()
-									+ " into "
-									+ outputDirectory.getAbsolutePath(), e);
-				}
-			}
+                            if (artifact.getFile().isDirectory()) {
+                                    try {
+                                            FileUtils
+                                                            .copyDirectory(artifact.getFile(), outputDirectory);
+                                    } catch (IOException e) {
+                                            throw new MojoExecutionException(
+                                                            "IOException while copying "
+                                                                            + artifact.getFile().getAbsolutePath()
+                                                                            + " into "
+                                                                            + outputDirectory.getAbsolutePath(), e);
+                                    }
+                            } else {
+                                    try {
+                                            unjar(new JarFile(artifact.getFile()), outputDirectory);
+                                    } catch (IOException e) {
+                                            throw new MojoExecutionException(
+                                                            "IOException while unjarring "
+                                                                            + artifact.getFile().getAbsolutePath()
+                                                                            + " into "
+                                                                            + outputDirectory.getAbsolutePath(), e);
+                                    }
+                            }
 
-		}
+                     }                    
+                }
 
 		try {
+                        getLog().debug("Unpacking " + inputFile + " ...");
 			unjar(new JarFile(inputFile), outputDirectory);
 		} catch (IOException e) {
 			throw new MojoExecutionException("IOException while unjarring "
