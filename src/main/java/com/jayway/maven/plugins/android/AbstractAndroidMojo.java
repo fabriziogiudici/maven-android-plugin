@@ -469,11 +469,8 @@ public abstract class AbstractAndroidMojo extends AbstractMojo {
             // BEGIN hardwired patch for issue 166
             List<String> excludedStuff = Arrays.asList
               (
-                "it.tidalwave.bluebill:it-tidalwave-semantic-io:jar",
-                "it.tidalwave.netbeans:it-tidalwave-netbeans-util:jar",
                 "org.netbeans.api:org-openide-util:jar",
-                "org.netbeans.api:org-openide-util-lookup:jar",
-                "org.openrdf.sesame:sesame-model:jar"
+                "org.netbeans.api:org-openide-util-lookup:jar"
               );
             
             if (excludedStuff.contains(artifact.toString().replaceAll(":jar:.*$", ":jar"))) {
