@@ -44,15 +44,6 @@ import com.jayway.maven.plugins.android.CommandExecutor;
  * @requiresDependencyResolution compile
  */
 public class UnpackMojo extends AbstractAndroidMojo {
-	/**
-	 * If true, the library will be unpacked only when outputDirectory doesn't
-	 * exist, i.e, a clean build for most cases.
-	 * 
-	 * @parameter expression="${android.lazyLibraryUnpack}"
-	 *            default-value="false"
-	 */
-	private boolean lazyLibraryUnpack;
-	
         /**
          * 
          * <p>Whether it should also unpack dependencies in addition to this module artifact.</p>
@@ -92,9 +83,7 @@ public class UnpackMojo extends AbstractAndroidMojo {
 	private File unpackClasses(File inputFile) throws MojoExecutionException {
 		File outputDirectory = new File(project.getBuild().getDirectory(),
 				"android-classes");
-                if (lazyLibraryUnpack && outputDirectory.exists())
-			getLog().info("skip library unpacking due to lazyLibraryUnpack policy");
-                else if (unpackDependencies) {
+                if (unpackDependencies) {
                     getLog().debug("Unpacking dependencies ...");
                     
                     for (Artifact artifact : getRelevantCompileArtifacts()) {
