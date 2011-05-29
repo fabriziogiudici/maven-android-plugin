@@ -34,6 +34,7 @@
                     </compile>
                     <process-classes>
                         org.apache.maven.plugins:maven-jar-plugin:jar,
+                        org.apache.maven.plugins:maven-shade-plugin:shade,
                         com.jayway.maven.plugins.android.generation2:maven-android-plugin:unpack
                     </process-classes>
                     <process-test-resources>
