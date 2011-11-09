@@ -26,7 +26,7 @@
             <configuration>
                 <phases>
                     <generate-sources>
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:generate-sources
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:generate-sources
                     </generate-sources>
                     <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources</process-resources>
                     <compile>
@@ -35,7 +35,7 @@
                     <process-classes>
                         org.apache.maven.plugins:maven-jar-plugin:jar,
                         org.apache.maven.plugins:maven-shade-plugin:shade,
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:unpack
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:unpack
                     </process-classes>
                     <process-test-resources>
                         org.apache.maven.plugins:maven-resources-plugin:testResources
@@ -43,19 +43,19 @@
                     <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
                     <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
                     <prepare-package>
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:dex
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:dex
                     </prepare-package>
                     <package>
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:apk
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:apk
                     </package>
                     <install>
                         org.apache.maven.plugins:maven-install-plugin:install
                     </install>
                     <pre-integration-test>
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:internal-pre-integration-test
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:internal-pre-integration-test
                     </pre-integration-test>
                     <integration-test>
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:internal-integration-test
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:internal-integration-test
                     </integration-test>
                     <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
                 </phases>
@@ -90,7 +90,7 @@
             <configuration>
                 <phases>
                     <generate-sources>
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:generate-sources
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:generate-sources
                     </generate-sources>
                     <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources</process-resources>
                     <compile>
@@ -98,7 +98,7 @@
                     </compile>
                     <process-classes>
                         org.apache.maven.plugins:maven-jar-plugin:jar,
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:unpack
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:unpack
                     </process-classes>
                     <process-test-resources>
                         org.apache.maven.plugins:maven-resources-plugin:testResources
@@ -106,7 +106,7 @@
                     <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
                     <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
                     <package>
-                        com.jayway.maven.plugins.android.generation2:maven-android-plugin:apklib
+                        it.tidalwave.fork.com.jayway.maven.plugins.android.generation2:maven-android-plugin:apklib
                     </package>
                     <install>
                         org.apache.maven.plugins:maven-install-plugin:install

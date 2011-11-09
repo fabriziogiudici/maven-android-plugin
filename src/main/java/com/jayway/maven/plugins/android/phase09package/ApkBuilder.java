@@ -99,9 +99,26 @@ public class ApkBuilder {
             addResourcesFromJarMethod = apkBuilderClass.getMethod(
                     "addResourcesFromJar", new Class[] { File.class });
 
-            addNativeLibrariesMethod = apkBuilderClass.getMethod(
-                    "addNativeLibraries", new Class[] { File.class, String.class });
-
+            //The addNativeLibraries signature changed for api 14
+            Method[] builderMethods = apkBuilderClass.getMethods();
+            for (Method method : builderMethods) {
+                if ("addNativeLibraries".equals(method.getName())) {
+                    Class<?>[] parameterTypes = method.getParameterTypes();
+                    //The old method (pre v14) took a second string parameter.
+                    if (parameterTypes.length == 2) {
+                        if (parameterTypes[0] == File.class && parameterTypes[1]== String.class) {
+                            addNativeLibrariesMethod = method;
+                            break;
+                        }
+                    } else if (parameterTypes.length == 1) {
+                        if (parameterTypes[0] == File.class) {
+                            addNativeLibrariesMethod = method;
+                            break;
+                        }
+                    }
+                }
+            }
+            
             addSourceFolderMethod = apkBuilderClass.getMethod(
                     "addSourceFolder", new Class[] { File.class });
 
